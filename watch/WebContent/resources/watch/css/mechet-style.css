@@ -1,0 +1,263 @@
+@charset "UTF-8";
+/* colors watch */
+:root { -
+	-back: #808080; -
+	color:azure;
+}
+
+@font-face {
+	font-family: "GostARegular";
+	src: url("#{resource['watch:fonts/GostARegular.eot']}");
+	src: url("#{resource['watch:fonts/GostARegular.eot']}&#iefix")
+		format('embedded-opentype'),
+		url("#{resource['watch:fonts/GostARegular.woff']}") format('woff'),
+		url("#{resource['watch:fonts/GostARegular.ttf']}") format('truetype');
+	font-style: normal;
+	font-weight: normal;
+}
+
+* {
+	padding: 0; 
+	margin: 0px;
+}
+
+body {
+	background-color:#000;;
+	font-family: "GostARegular";
+	text-transform: uppercase;
+	color:azure;
+  	text-indent: 2px;
+}
+
+sup {
+	font-size: 20%;
+}
+span{
+	font-size:80%;
+}
+
+.wrapper {
+	display: grid;
+  grid-template-rows: 30px 30px;
+  grid-template-columns:repeat(4, 140px);
+  grid-column-gap: 16px;
+  grid-row-gap: 14px;
+  margin-top: 6px;
+  margin-left: 12px;
+  justify-items: stretch;
+	align-items: stretch;
+}
+
+.wrapper>div {
+	padding: 0;
+  	margin: 0;
+  	background: #808080;
+  	color: var(- -textcol);
+  	text-align: center;
+}
+
+.wrapper_1 {
+	 display: grid;
+  	grid-template-rows: 30px 30px;
+  	grid-template-columns: 160px 160px;
+  	grid-column-gap: 160px;
+  	margin-top: 14px;
+  	margin-bottom: -30px;
+  	margin-left: 80px;
+  	justify-items: stretch;
+	align-items: stretch;
+	
+}
+
+.wrapper_1>div {	
+	font-size: 180%;
+  	padding: 0;
+  	margin: 0;
+  	background: #808080;
+  	color: var(- -textcol);
+  	text-indent: 40px;
+  	line-height: 30px;
+}
+
+.before_namaz {
+	display: grid;
+    grid-template-rows: repeat(1, 30px);
+    grid-template-columns:repeat(6,88px);
+    grid-column-gap: 16px;
+  	grid-row-gap: 14px;
+  	margin-top: 14px;
+  	margin-left: 12px;
+  	justify-items: stretch;
+	align-items: stretch;
+}
+.before_namaz> div{
+	padding: 0;
+  	margin: 0;
+  	background:#808080;
+  	text-align: center;
+	}
+.table {
+	display: grid;
+  	grid-template-rows:repeat(6, 30px);
+  	grid-template-columns:192px 88px 192px 88px;
+  	grid-column-gap: 16px;
+  	grid-row-gap: 14px;
+  	margin-top: 22px;
+  	margin-left: 12px;
+  	justify-items: stretch;
+	align-items: stretch;
+}
+.table_2, .table_1 {
+		display: contents;
+		border-spacing: 0;
+		border-collapse: collapse;
+		border: none;
+}
+.table_2 tbody{
+	display: grid;
+	grid-template-rows: repeat(6, 30px);
+	grid-template-columns: 88px 88px;
+	justify-items: stretch;
+	align-items: stretch;
+	grid-column-gap: 16px;
+  	grid-row-gap: 14px;
+}
+
+.table_2 .column1 {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	padding: 0;
+  	margin: 0;
+ 	background:#808080;
+  	color: azure;
+  	text-align: center;
+}
+
+.table_2 .column2 {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	padding: 0;
+  	margin: 0;
+ 	background:#808080;
+  	color: azure;
+  	text-align: center;
+  	font-size: 24px;
+}
+.table_2 .row {
+	display: contents;
+	padding: 0px;
+	margin: 0;
+	color: var(- -textcol);
+	text-align: center;
+	line-height: 33px;
+	/* font-size: 24px; */
+  	line-height: 30px
+}
+.table_1 tbody{
+	display: grid;
+	grid-template-rows: repeat(6, 30px);
+	grid-template-columns: 88px;
+	justify-items: stretch;
+	align-items: stretch;
+	  grid-column-gap: 16px;
+  grid-row-gap: 14px;
+}
+
+.table_1 .column1 {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	padding: 0;
+  	margin: 0;
+ 	background:#808080;
+  	color: azure;
+  	text-align: center;
+}
+
+.table_1 .row {
+	display: contents;
+	padding: 0px;
+	margin: 0;
+	color: var(- -textcol);
+	text-align: center;
+	line-height: 33px;
+  	line-height: 30px;
+}
+
+.wrapper_3 {
+	display: grid;
+	grid-template-columns: repeat(6, 48px);
+	grid-template-rows: 30px;
+	grid-column-gap: 56px;
+	margin: 13px 32px;
+	justify-items: stretch;
+	align-items: stretch;
+}
+
+.wrapper_3>div {
+	font-size: 130%;
+	padding: 0;
+	margin: 0;
+	background: #808080;
+	color: var(- -textcol);
+	text-align: center;
+}
+.temptable {
+	display: grid;
+	grid-template-columns: 60px 60px 88px 60px;
+	grid-template-rows: 33px;
+	grid-column-gap: 88px;
+	margin: 22px 0px 0px 56px;
+	justify-items: stretch;
+	align-items: stretch;
+}
+
+.sm {
+	text-transform: lowercase;
+	font-size: 100%;
+	margin: 20px auto;
+}
+
+.low {
+	text-transform: lowercase;
+}
+.date_box {
+	font-size: 24px;
+	line-height: 30px;
+}
+
+.box1 {
+
+	line-height: 30px;
+}
+
+.box2 {
+	line-height: 15px;
+	vertical-align: middle;
+}
+
+.box3 {
+
+	line-height: 30px;
+}
+
+.box4 {
+	font-size: 18px;
+	line-height: 30px;
+}
+
+.box8 {
+	font-size: 24px;
+	line-height: 30px;
+	text-indent: 2px;
+}
+
+.box9 {
+	line-height: 25px;
+}
+
+.box10 {
+	line-height: 30px;
+}
+.box11{
+	font-size:120%;
+}
