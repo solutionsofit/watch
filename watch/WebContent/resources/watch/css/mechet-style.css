@@ -27,6 +27,7 @@ body {
 	text-transform: uppercase;
 	color:azure;
   	text-indent: 2px;
+  
 }
 
 sup {
@@ -259,5 +260,13 @@ span{
 	line-height: 30px;
 }
 .box11{
-	font-size:120%;
+	font-size:24px;
 }
+.box12{
+	font-size:18px;
+}
+.box13{
+	font-size:16px;
+	line-height: 30px;
+}
+

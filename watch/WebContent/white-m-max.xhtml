@@ -30,7 +30,7 @@
 	
 	
 	var sunrise = true;
-	var month_day="none";
+	var month_day="day";
 	function init () {
 		
 		msg_turn_off_phone_ru = "#{managedMechetNamazMax.messageTopRu}";	
@@ -171,13 +171,7 @@
 		  
 	  }
 	  else{
-	if(month_day=="none"){
-		month_day="day"
-		  document.getElementById('month_day1').innerHTML =day_tat +" "+ month_tat
-		  document.getElementById('month_day2').innerHTML =day_ar +" "+ month_ar
-		  document.getElementById('month_day3').innerHTML =day_tat +" "+ month_ru
-		  document.getElementById('month_day4').innerHTML =day_en +" "+ month_en
-	}else if(month_day=="day"){
+	 if(month_day=="day"){
 		month_day="month"
 		 document.getElementById('month_day1').innerHTML =day_tat
 		  document.getElementById('month_day2').innerHTML =day_ar
@@ -186,9 +180,9 @@
 	}else if(month_day=="month"){
 		  month_day="day"
 		  document.getElementById('month_day1').innerHTML =month_tat
-		  document.getElementById('month_day2').innerHTML =month_ar
+		  document.getElementById('month_day2').innerHTML =month_arIslam
 		  document.getElementById('month_day3').innerHTML =month_ru
-		  document.getElementById('month_day4').innerHTML =month_en
+		  document.getElementById('month_day4').innerHTML =month_enIslam
 	}
 	  }
 	  
@@ -237,7 +231,7 @@
 	<h:form>
 
 		<!-- Дата время день -->
-		<div class="wrapper">
+		<div class="wrapper box12">
 			<div class="date_box" id="digital_watch1"></div>
 			<div class="date_box" id="digital_watch2">#{managedMechetNamazMax.dateIslam}</div>
 			<div class="date_box" id="digital_watch3"></div>
@@ -253,7 +247,7 @@
 			<div id="time2"></div>
 		</div>
 
-		<div class="table">
+		<div class="table box11">
 			<h:dataTable  var="massiv"
 				value="#{managedMechetNamazMax.namazesTatFajr}"
 				styleClass="table_2 fajr" columnClasses="column1, column2"
@@ -266,7 +260,7 @@
 				</h:column>
 			</h:dataTable>
 			<h:dataTable  var="massiv"
-				value="#{managedMechetNamazMax.namazesTatSun}" styleClass="table_2 Sun box11"
+				value="#{managedMechetNamazMax.namazesTatSun}" styleClass="table_2 Sun box12"
 				columnClasses="column1, column2" rowClasses="row">
 				<h:column>
 					<div>#{massiv.name}</div>
@@ -340,7 +334,7 @@
 					<div id="t"></div>
 				</div>
 			</div>
-			<div class="box4 before_prayer">
+			<div class="before_prayer box13">
 				<div>#{managedMechetNamazMax.messageBottomAr}</div>
 			</div>
 
