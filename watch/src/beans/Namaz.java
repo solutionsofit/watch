@@ -1,16 +1,15 @@
 package beans;
 
-import java.sql.Date;
+
 import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.Map;
 
 public class Namaz {
 	SimpleDateFormat ad = new SimpleDateFormat("HH:mm");
 	private String date;
 	private String name;
 	private String template;
-	private Map<String, Date> namaz_mas;
+	
 
 	public String getDate() {
 		return date;
@@ -28,13 +27,7 @@ public class Namaz {
 		this.name = name;
 	}
 
-	public Map<String, Date> getNamaz_mas() {
-		return namaz_mas;
-	}
-
-	public void setNamaz_mas(Map<String, Date> namaz_mas) {
-		this.namaz_mas = namaz_mas;
-	}
+	
 
 	public String getTemplate() {
 		return template;

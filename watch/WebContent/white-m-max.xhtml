@@ -3,60 +3,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
 	<h:outputScript library="watch" name="js/jquery.js" />
 	<script>
 	
-	var msg_turn_off_phone_ru = "";	
-	var msg_turn_off_phone_tat = "";	
-	var msg_turn_off_phone_ar = "";	
-	var msg_turn_off_phone_en = "";
-	var day_ru = "";
-	var day_tat = "";
-	var day_ar = "";
-	var day_en = "";
-	var month_ru = "";
-	var month_tat = "";
-	var month_ar = "";
-	var month_en = "";	
-	var date_islam = "";
-	var month_arIslam = "";
-	var month_enIslam = "";
+	
+	
 	
 	var thour;
 	var tmin;
 	
-	
+	var targetDate10m=new Date().getTime()+(1000*60*10);
+	var targetDate5m=new Date().getTime()+(1000*60*5);
 	var sunrise = true;
 	var month_day="day";
-	function init () {
-		
-		msg_turn_off_phone_ru = "#{managedMechetNamazMax.messageTopRu}";	
-		msg_turn_off_phone_tat = "#{managedMechetNamazMax.messageTopTat}";	
-		msg_turn_off_phone_ar = "#{managedMechetNamazMax.messageTopAr}";	
-		msg_turn_off_phone_en = "#{managedMechetNamazMax.messageTopEn}";
-		day_ru = "#{managedMechetNamazMax.dayRu}";
-		day_tat = "#{managedMechetNamazMax.dayTat}";
-		day_ar = "#{managedMechetNamazMax.dayAr}";
-		day_en = "#{managedMechetNamazMax.dayEn}";
-		month_ru = "#{managedMechetNamazMax.monthRu}";
-		month_tat = "#{managedMechetNamazMax.monthTat}";
-		month_ar = "#{managedMechetNamazMax.monthAr}";
-		month_en = "#{managedMechetNamazMax.monthEn}";
-		
-		date_islam = "#{managedMechetNamazMax.dateIslam}";
-		month_ruIslam = "#{managedMechetNamazMax.monthRuIslam}";
-		month_tatIslam = "#{managedMechetNamazMax.monthTatIslam}";
-		month_arIslam = "#{managedMechetNamazMax.monthArIslam}";
-		month_enIslam = "#{managedMechetNamazMax.monthEnIslam}";
-						
-	}
+	
 
   function digitalWatch() { 
-	var massiv="#{managedMechetNamazMax.namazTime}";	
-    var date = new Date();
+	var namaz=document.getElementById('namazTime').value;
+	
+	
+
+	    var date = new Date();
 	var todayD=date.getDay();
     var todayDD=date.getDate();
   
@@ -65,22 +34,22 @@
     var todayY=date.getFullYear();
     var today=new Date();
 
-	var massiv3;
+	var namaz3;
 	
-	massiv3=massiv.slice(1).split(','+' ',6)
-	
-	var namazTime1=massiv3[0].charAt(0)+massiv3[0].charAt(1);
-	var namazTime2=massiv3[1].charAt(0)+massiv3[1].charAt(1);
-	var namazTime3=massiv3[2].charAt(0)+massiv3[2].charAt(1);
-	var namazTime4=massiv3[3].charAt(0)+massiv3[3].charAt(1);
-	var namazTime5=massiv3[4].charAt(0)+massiv3[4].charAt(1);
-	var namazTime6=massiv3[5].charAt(0)+massiv3[5].charAt(1);
-		
+	namaz3=namaz.slice(1).split(','+' ',7)
 
-	for(k=0;k&lt;massiv3.length;k++){
 	
-	var namazHr=massiv3[k].charAt(0)+massiv3[k].charAt(1);
-	var namazMin=massiv3[k].charAt(3)+massiv3[k].charAt(4)
+	var namazTime1=namaz3[1].charAt(0)+namaz3[1].charAt(1);
+	var namazTime2=namaz3[2].charAt(0)+namaz3[2].charAt(1);
+	var namazTime3=namaz3[3].charAt(0)+namaz3[3].charAt(1);
+	var namazTime4=namaz3[4].charAt(0)+namaz3[4].charAt(1);
+	var namazTime5=namaz3[5].charAt(0)+namaz3[5].charAt(1);
+	var namazTime6=namaz3[6].charAt(0)+namaz3[6].charAt(1);
+	
+	for(k=1;k&lt;namaz3.length;k++){
+	
+	var namazHr=namaz3[k].charAt(0)+namaz3[k].charAt(1);
+	var namazMin=namaz3[k].charAt(3)+namaz3[k].charAt(4)
 	
 	var d=new Date();
 	var time=d.getHours();
@@ -94,9 +63,9 @@
     tsec=today%60; today=Math.floor(today/60); if(tsec&lt;10)tsec='0'+tsec;
     tmin=today%60; today=Math.floor(today/60); if(tmin&lt;10)tmin='0'+tmin;
     thour=today%24; today=Math.floor(today/24); if(thour&lt;10)thour='0'+thour;
-    timestr=thour+":"+tmin+":"+tsec;
-    document.getElementById('t').innerHTML=timestr;
-    document.getElementById('t1').innerHTML=timestr;
+    timestr=tmin+":"+tsec;
+    document.getElementById('time').innerHTML=timestr;
+    document.getElementById('time1').innerHTML=timestr;
    	
 		break;	
 		}
@@ -110,9 +79,11 @@
     tsec=today%60; today=Math.floor(today/60); if(tsec&lt;10)tsec='0'+tsec;
     tmin=today%60; today=Math.floor(today/60); if(tmin&lt;10)tmin='0'+tmin;
     thour=today%24; today=Math.floor(today/24); if(thour&lt;10)thour='0'+thour;
-    timestr=thour+":"+tmin+":"+tsec;
-    document.getElementById('t').innerHTML=timestr;
-     document.getElementById('t1').innerHTML=timestr;
+    timestr=tmin+":"+tsec;
+    document.getElementById('time').innerHTML=timestr;
+    document.getElementById('time1').innerHTML=timestr;
+  
+ 
   
 		break;
 		}
@@ -125,17 +96,17 @@
     tmin=today%60; today=Math.floor(today/60); if(tmin&lt;10)tmin='0'+tmin;
     thour=today%24; today=Math.floor(today/24);
     if(thour&lt;10)thour='0'+thour;
-    timestr=thour+":"+tmin+":"+tsec;
-    document.getElementById('t').innerHTML=timestr;
-    document.getElementById('t1').innerHTML=timestr; 
+    timestr=tmin+":"+tsec;
+    document.getElementById('time').innerHTML=timestr;
+    document.getElementById('time1').innerHTML=timestr;
 		break;
 		}
 	}
    <!--  Дата -->
  if(todayM &lt;10){
-   		today = todayDD+'-'+'0'+todayM +'-'+ todayY;
+   		today = todayDD+'.'+'0'+todayM +'.'+ todayY;
    	}else{
-   		today = todayDD+'-'+todayM +'-'+ todayY;
+   		today = todayDD+'.'+todayM +'.'+ todayY;
    		}
 	<!-- Часы -->
     var hours = date.getHours();
@@ -149,8 +120,8 @@
    <!--   document.getElementById("digital_watch2").innerHTML = today; -->
       document.getElementById("digital_watch3").innerHTML = today;
       <!--  document.getElementById("digital_watch4").innerHTML = today; -->
-    document.getElementById("time").innerHTML = hours + ":" + minutes + ":&#60;span&gt;" + seconds + "&#60;/span&gt;";
-    document.getElementById("time2").innerHTML = hours + ":" + minutes + ":&#60;span&gt;" + seconds + "&#60;/span&gt;";
+    document.getElementById("digital_time").innerHTML = hours + ":" + minutes + ":&#60;span&gt;" + seconds + "&#60;/span&gt;";
+    document.getElementById("digital_time1").innerHTML = hours + ":" + minutes + ":&#60;span&gt;" + seconds + "&#60;/span&gt;";
     
     <!-- Условие на появление строки за 15 минут до молитвы -->
     if (thour == 0 &amp;&amp; tmin &#60; 15) {
@@ -164,25 +135,49 @@
   function changeDayMonth(){
 	  
 	  if(thour==0 &amp;&amp; tmin &#60; 15){
-		  document.getElementById('month_day1').innerHTML =msg_turn_off_phone_tat
-		  document.getElementById('month_day2').innerHTML =msg_turn_off_phone_ar
-		  document.getElementById('month_day3').innerHTML =msg_turn_off_phone_ru
-		  document.getElementById('month_day4').innerHTML =msg_turn_off_phone_en
+		  	$(".msgTurnOffPhoneTat").css("display","");
+			$(".msgTurnOffPhoneRu").css("display","");
+			$(".msgTurnOffPhoneAr").css("display","");
+			$(".msgTurnOffPhoneEn").css("display","");
+		    $(".dayTat").css("display","none");
+	    	$(".dayRu").css("display","none");
+	    	$(".dayAr").css("display","none");
+	    	$(".dayEn").css("display","none");					    	
+	    	$(".monthTat").css("display","none");
+	    	$(".monthRu").css("display","none");
+	    	$(".monthArIslam").css("display","none");
+	    	$(".monthEnIslam").css("display","none");
 		  
 	  }
 	  else{
 	 if(month_day=="day"){
 		month_day="month"
-		 document.getElementById('month_day1').innerHTML =day_tat
-		  document.getElementById('month_day2').innerHTML =day_ar
-		  document.getElementById('month_day3').innerHTML =day_tat
-		  document.getElementById('month_day4').innerHTML =day_en
+		$(".msgTurnOffPhoneTat").css("display","none");
+		$(".msgTurnOffPhoneRu").css("display","none");
+		$(".msgTurnOffPhoneAr").css("display","none");
+		$(".msgTurnOffPhoneEn").css("display","none");
+		$(".dayRu").css("display","");
+    	$(".dayTat").css("display","");
+    	$(".dayAr").css("display","");
+    	$(".dayEn").css("display","");					    	
+    	$(".monthTat").css("display","none");
+    	$(".monthRu").css("display","none");
+    	$(".monthArIslam").css("display","none");
+    	$(".monthEnIslam").css("display","none");
 	}else if(month_day=="month"){
 		  month_day="day"
-		  document.getElementById('month_day1').innerHTML =month_tat
-		  document.getElementById('month_day2').innerHTML =month_arIslam
-		  document.getElementById('month_day3').innerHTML =month_ru
-		  document.getElementById('month_day4').innerHTML =month_enIslam
+			$(".msgTurnOffPhoneTat").css("display","none");
+			$(".msgTurnOffPhoneRu").css("display","none");
+			$(".msgTurnOffPhoneAr").css("display","none");
+			$(".msgTurnOffPhoneEn").css("display","none");
+			$(".dayRu").css("display","none");
+	    	$(".dayTat").css("display","none");
+	    	$(".dayAr").css("display","none");
+	    	$(".dayEn").css("display","none");					    	
+	    	$(".monthTat").css("display","");
+	    	$(".monthRu").css("display","");
+	    	$(".monthArIslam").css("display","");
+	    	$(".monthEnIslam").css("display","");
 	}
 	  }
 	  
@@ -201,7 +196,7 @@
 		
 	}
   function loadscript(){	
-		init();
+		
 	 	digitalWatch();
 	 	changeSunrise();
 	 	changeDayMonth()
@@ -228,99 +223,113 @@
 
 <h:body onload="loadscript()">
 
-	<h:form>
+	<h:form prependId="false">
 
 		<!-- Дата время день -->
-		<div class="wrapper box12">
+		<div class="wrapper box16">
+			<h:inputHidden id="namazTime"
+				value="#{managedMechetNamazMax.namazTime}"></h:inputHidden>
+
+
 			<div class="date_box" id="digital_watch1"></div>
 			<div class="date_box" id="digital_watch2">#{managedMechetNamazMax.dateIslam}</div>
 			<div class="date_box" id="digital_watch3"></div>
 			<div class="date_box" id="digital_watch4">#{managedMechetNamazMax.dateIslam}</div>
 
-			<div class="box3" id="month_day1"></div>
-			<div class="box1" id="month_day2"></div>
-			<div class="box3" id="month_day3"></div>
-			<div class="box1" id="month_day4"></div>
+			<div class="box3 msgTurnOffPhoneTat">#{managedMechetNamazMax.messageTopTat}</div>
+			<div class="box14 msgTurnOffPhoneAr">#{managedMechetNamazMax.messageTopAr}
+			</div>
+			<div class="box3 msgTurnOffPhoneRu">
+				#{managedMechetNamazMax.messageTopRu}</div>
+			<div class="box3 msgTurnOffPhoneEn">
+				#{managedMechetNamazMax.messageTopEn}</div>
+
+
+			<div class="box3 dayTat">#{managedMechetNamazMax.dayTat}</div>
+			<div class="box3 dayAr ">#{managedMechetNamazMax.dayAr}</div>
+			<div class="box1 dayRu">#{managedMechetNamazMax.dayRu}</div>
+			<div class="box1 dayEn">#{managedMechetNamazMax.dayEn}</div>
+
+			<div class="box3 monthTat">#{managedMechetNamazMax.monthTat}</div>
+			<div class="box3 monthArIslam">
+				#{managedMechetNamazMax.monthArIslam}</div>
+			<div class="box1 monthRu">#{managedMechetNamazMax.monthRu}</div>
+			<div class="box1 monthEnIslam">
+				#{managedMechetNamazMax.monthEnIslam}</div>
 		</div>
 		<div class="wrapper_1">
-			<div id="time"></div>
-			<div id="time2"></div>
+			<div id="digital_time"></div>
+			<div id="digital_time1"></div>
 		</div>
 
 		<div class="table box11">
-			<h:dataTable  var="massiv"
-				value="#{managedMechetNamazMax.namazesTatFajr}"
-				styleClass="table_2 fajr" columnClasses="column1, column2"
+			<h:dataTable var="n" value="#{managedMechetNamazMax.namazesTatFajr}"
+				styleClass="table_2 fajr box12" columnClasses="column1, column2"
 				rowClasses="row">
 				<h:column>
-					<div>#{massiv.name}</div>
+					<div>#{n.name}</div>
 				</h:column>
 				<h:column>
-					<div>#{massiv.date}</div>
+					<div>#{n.date}</div>
 				</h:column>
 			</h:dataTable>
-			<h:dataTable  var="massiv"
-				value="#{managedMechetNamazMax.namazesTatSun}" styleClass="table_2 Sun box12"
-				columnClasses="column1, column2" rowClasses="row">
+			<h:dataTable id="namazesSun" var="n" value="#{managedMechetNamazMax.namazesTatSun}"
+				styleClass="table_2 Sun box12" columnClasses="column1, column2"
+				rowClasses="row">
 				<h:column>
-					<div>#{massiv.name}</div>
+					<div>#{n.name}</div>
 				</h:column>
 				<h:column>
-					<div>#{massiv.date}</div>
+					<div>#{n.date}</div>
 				</h:column>
 			</h:dataTable>
-			<h:dataTable  var="massiv"
-				value="#{managedMechetNamazMax.namazesArFajr}"
+			<h:dataTable  var="n" value="#{managedMechetNamazMax.namazesArFajr}"
 				styleClass="table_1 fajr" columnClasses="column1" rowClasses="row">
 				<h:column>
-					<div>#{massiv.name}</div>
+					<div>#{n.name}</div>
 				</h:column>
 			</h:dataTable>
-			<h:dataTable var="massiv"
-				value="#{managedMechetNamazMax.namazesArSun}" styleClass="table_1 Sun"
-				columnClasses="column1" rowClasses="row">
+			<h:dataTable var="n" value="#{managedMechetNamazMax.namazesArSun}"
+				styleClass="table_1 Sun" columnClasses="column1" rowClasses="row">
 				<h:column>
-					<div>#{massiv.name}</div>
+					<div>#{n.name}</div>
 				</h:column>
 			</h:dataTable>
-			
-			
-			
-			
-			
-			<h:dataTable  var="massiv"
-				value="#{managedMechetNamazMax.namazesRuFajr}"
+
+
+
+
+
+			<h:dataTable var="n" value="#{managedMechetNamazMax.namazesRuFajr}"
 				styleClass="table_2 fajr" columnClasses="column1, column2"
 				rowClasses="row">
 				<h:column>
-					<div>#{massiv.name}</div>
+					<div>#{n.name}</div>
 				</h:column>
 				<h:column>
-					<div>#{massiv.date}</div>
-				</h:column>
-			</h:dataTable>
-			<h:dataTable  var="massiv"
-				value="#{managedMechetNamazMax.namazesRuSun}" styleClass="table_2 Sun"
-				columnClasses="column1, column2" rowClasses="row">
-				<h:column>
-					<div>#{massiv.name}</div>
-				</h:column>
-				<h:column>
-					<div>#{massiv.date}</div>
+					<div>#{n.date}</div>
 				</h:column>
 			</h:dataTable>
-			<h:dataTable  var="massiv"
-				value="#{managedMechetNamazMax.namazesEnFajr}" styleClass="table_1 fajr"
-				columnClasses="column1" rowClasses="row">
+			<h:dataTable var="n" value="#{managedMechetNamazMax.namazesRuSun}"
+				styleClass="table_2 Sun" columnClasses="column1, column2"
+				rowClasses="row">
 				<h:column>
-					<div>#{massiv.name}</div>
+					<div>#{n.name}</div>
+				</h:column>
+				<h:column>
+					<div>#{n.date}</div>
 				</h:column>
 			</h:dataTable>
-			<h:dataTable  var="massiv"
-				value="#{managedMechetNamazMax.namazesEnSun}" styleClass="table_1 Sun"
-				columnClasses="column1" rowClasses="row">
+			<h:dataTable var="n" value="#{managedMechetNamazMax.namazesEnFajr}"
+				styleClass="table_1 fajr" columnClasses="column1" rowClasses="row">
 				<h:column>
-					<div>#{massiv.name}</div>
+					<div>#{n.name}</div>
+				</h:column>
+			</h:dataTable>
+			<h:dataTable var="n" value="#{managedMechetNamazMax.namazesEnSun}"
+				styleClass="table_1 Sun" columnClasses="column1" rowClasses="row">
+				<h:column>
+					<div>#{n.name}</div>
 				</h:column>
 			</h:dataTable>
 
@@ -331,7 +340,7 @@
 			</div>
 			<div class="box8 before_prayer">
 				<div>
-					<div id="t"></div>
+					<div id="time"></div>
 				</div>
 			</div>
 			<div class="before_prayer box13">
@@ -344,10 +353,10 @@
 			</div>
 			<div class="box8 before_prayer">
 				<div>
-					<div id="t1"></div>
+					<div id="time1"></div>
 				</div>
 			</div>
-			<div class="box2 before_prayer">
+			<div class="box15 before_prayer">
 				<div>#{managedMechetNamazMax.messageBottomEn}</div>
 			</div>
 		</div>
@@ -358,19 +367,20 @@
 			<div class="box4">
 				<span class="low">t</span><sup>0</sup>C
 			</div>
-			<div class="box4">22</div>
-			<div class="box5">
+			<div class="box5">22</div>
+			<div class="box4">
 
 				<span class="low">t</span><sup>0</sup>C
 			</div>
 			<div class="box4">
 				<span class="low">t</span><sup>0</sup>C
 			</div>
-			<div class="box4">22</div>
+			<div class="box5">22</div>
 			<div class="box4">
 				<span class="low">t</span><sup>0</sup>C
 			</div>
 		</div>
+
 
 	</h:form>
 

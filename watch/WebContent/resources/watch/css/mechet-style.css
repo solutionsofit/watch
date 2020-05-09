@@ -22,7 +22,7 @@
 }
 
 body {
-	background-color:#000;;
+	background-color:black;
 	font-family: "GostARegular";
 	text-transform: uppercase;
 	color:azure;
@@ -39,14 +39,14 @@ span{
 
 .wrapper {
 	display: grid;
-  grid-template-rows: 30px 30px;
-  grid-template-columns:repeat(4, 140px);
-  grid-column-gap: 16px;
-  grid-row-gap: 14px;
-  margin-top: 6px;
-  margin-left: 12px;
-  justify-items: stretch;
-	align-items: stretch;
+    grid-template-rows: 35px 35px;
+    grid-template-columns: repeat(4, 140px);
+    grid-column-gap: 16px;
+    grid-row-gap: 9px;
+    margin-top: 6px;
+    margin-left: 11px;
+    justify-items: stretch;
+    align-items: stretch;
 }
 
 .wrapper>div {
@@ -58,16 +58,15 @@ span{
 }
 
 .wrapper_1 {
-	 display: grid;
-  	grid-template-rows: 30px 30px;
-  	grid-template-columns: 160px 160px;
-  	grid-column-gap: 160px;
-  	margin-top: 14px;
-  	margin-bottom: -30px;
-  	margin-left: 80px;
-  	justify-items: stretch;
-	align-items: stretch;
-	
+	display: grid;
+    grid-template-rows: 35px 35px;
+    grid-template-columns: 160px 160px;
+    grid-column-gap: 168px;
+    margin-top: 9px;
+    margin-bottom: -35px;
+    margin-left: 71px;
+    justify-items: stretch;
+    align-items: stretch;	
 }
 
 .wrapper_1>div {	
@@ -75,21 +74,21 @@ span{
   	padding: 0;
   	margin: 0;
   	background: #808080;
-  	color: var(- -textcol);
+  	color: var( -textcol);
   	text-indent: 40px;
-  	line-height: 30px;
+    line-height: 35px;
 }
 
 .before_namaz {
 	display: grid;
-    grid-template-rows: repeat(1, 30px);
+    grid-template-rows: repeat(1, 34px);
     grid-template-columns:repeat(6,88px);
     grid-column-gap: 16px;
-  	grid-row-gap: 14px;
-  	margin-top: 14px;
-  	margin-left: 12px;
-  	justify-items: stretch;
-	align-items: stretch;
+    grid-row-gap: 10px;
+    margin-top: 10px;
+    margin-left: 11px;
+    justify-items: stretch;
+    align-items: stretch;
 }
 .before_namaz> div{
 	padding: 0;
@@ -99,14 +98,14 @@ span{
 	}
 .table {
 	display: grid;
-  	grid-template-rows:repeat(6, 30px);
-  	grid-template-columns:192px 88px 192px 88px;
-  	grid-column-gap: 16px;
-  	grid-row-gap: 14px;
-  	margin-top: 22px;
-  	margin-left: 12px;
-  	justify-items: stretch;
-	align-items: stretch;
+    grid-template-rows: repeat(6, 34px);
+    grid-template-columns: 192px 88px 192px 88px;
+    grid-column-gap: 16px;
+    grid-row-gap: 10px;
+    margin-top: 18px;
+    margin-left: 11px;
+    justify-items: stretch;
+    align-items: stretch;
 }
 .table_2, .table_1 {
 		display: contents;
@@ -116,12 +115,12 @@ span{
 }
 .table_2 tbody{
 	display: grid;
-	grid-template-rows: repeat(6, 30px);
+	grid-template-rows: repeat(6, 34px);
 	grid-template-columns: 88px 88px;
 	justify-items: stretch;
 	align-items: stretch;
 	grid-column-gap: 16px;
-  	grid-row-gap: 14px;
+    grid-row-gap: 10px;
 }
 
 .table_2 .column1 {
@@ -152,16 +151,17 @@ span{
 	text-align: center;
 	line-height: 33px;
 	/* font-size: 24px; */
-  	line-height: 30px
+  	line-height: 35px
 }
+
 .table_1 tbody{
 	display: grid;
-	grid-template-rows: repeat(6, 30px);
+	grid-template-rows: repeat(6, 34px);
 	grid-template-columns: 88px;
 	justify-items: stretch;
 	align-items: stretch;
-	  grid-column-gap: 16px;
-  grid-row-gap: 14px;
+	grid-column-gap: 16px;
+    grid-row-gap: 10px;
 }
 
 .table_1 .column1 {
@@ -181,17 +181,17 @@ span{
 	color: var(- -textcol);
 	text-align: center;
 	line-height: 33px;
-  	line-height: 30px;
+  	line-height: 35px;
 }
 
 .wrapper_3 {
 	display: grid;
-	grid-template-columns: repeat(6, 48px);
-	grid-template-rows: 30px;
-	grid-column-gap: 56px;
-	margin: 13px 32px;
-	justify-items: stretch;
-	align-items: stretch;
+    grid-template-columns: repeat(6, 48px);
+    grid-template-rows: 34px;
+    grid-column-gap: 56px;
+    margin: 9px 32px;
+    justify-items: stretch;
+    align-items: stretch;
 }
 
 .wrapper_3>div {
@@ -205,7 +205,7 @@ span{
 .temptable {
 	display: grid;
 	grid-template-columns: 60px 60px 88px 60px;
-	grid-template-rows: 33px;
+	grid-template-rows: 34px;
 	grid-column-gap: 88px;
 	margin: 22px 0px 0px 56px;
 	justify-items: stretch;
@@ -223,32 +223,35 @@ span{
 }
 .date_box {
 	font-size: 24px;
-	line-height: 30px;
+    line-height: 35px;
 }
 
 .box1 {
 
-	line-height: 30px;
+	line-height: 35px;
 }
 
 .box2 {
-	line-height: 15px;
-	vertical-align: middle;
+	font-size: 15px;
+    line-height: 17px;
 }
 
 .box3 {
 
-	line-height: 30px;
+	line-height: 35px;
 }
 
 .box4 {
 	font-size: 18px;
-	line-height: 30px;
+	line-height: 25px;
+}
+.box5{
+	line-height:35px;
 }
 
 .box8 {
 	font-size: 24px;
-	line-height: 30px;
+	line-height: 35px;
 	text-indent: 2px;
 }
 
@@ -257,16 +260,27 @@ span{
 }
 
 .box10 {
-	line-height: 30px;
+	line-height: 35px;
 }
 .box11{
 	font-size:24px;
 }
 .box12{
-	font-size:18px;
+	font-size:21px;
 }
 .box13{
 	font-size:16px;
-	line-height: 30px;
+	line-height: 35px;
+}
+.box14{
+	font-size:24px;
+	line-height: 35px;
+	
+}
+.box15{
+	line-height: 15px;
+}
+.box16{
+	font-size:18px;
 }
 

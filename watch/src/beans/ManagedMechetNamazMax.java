@@ -164,6 +164,7 @@ public class ManagedMechetNamazMax {
 		ArrayList<String> data_ar = new ArrayList<>();
 
 		SimpleDateFormat formatterdate = new SimpleDateFormat("dd.MM.yyyy");
+		SimpleDateFormat formatterdate1 = new SimpleDateFormat("MM");
 
 		Date today = new Date(System.currentTimeMillis());
 
@@ -216,19 +217,11 @@ public class ManagedMechetNamazMax {
 		}
 
 		dateIslam = formatterdate.format(getIslamDateByToday(today));
-		data_ar = dataOutput(today, "ar");
-		monthTatIslam = getMonth("tat").get(Integer.parseInt(data_ar.get(5)) + 11);// +11 потому что в базе данных
-																					// мусульманские месяца идут с 11
-																					// индекса
-		monthRuIslam = getMonth("ru").get(Integer.parseInt(data_ar.get(5)) + 11);// +11 потому что в базе данных
-																					// мусульманские месяца идут с 11
-																					// индекса
-		monthArIslam = getMonth("ar").get(Integer.parseInt(data_ar.get(5)) + 11);// +11 потому что в базе данных
-																					// мусульманские месяца идут с 11
-																					// индекса
-		monthEnIslam = getMonth("en").get(Integer.parseInt(data_ar.get(5)) + 11);// +11 потому что в базе данных
-																					// мусульманские месяца идут с 11
-																					// индекса
+		
+		monthTatIslam =getIslamMonth("tat",formatterdate1.format(getIslamDateByToday(today)));
+		monthRuIslam = getIslamMonth("ru",formatterdate1.format(getIslamDateByToday(today)));
+		monthArIslam =getIslamMonth("ar",formatterdate1.format(getIslamDateByToday(today)));
+		monthEnIslam = getIslamMonth("en",formatterdate1.format(getIslamDateByToday(today)));
 
 		monthAr = getMonth("ar").get(today.getMonth());
 		monthTat = getMonth("tat").get(today.getMonth());
@@ -237,6 +230,7 @@ public class ManagedMechetNamazMax {
 
 		dayTat = getDay("tat");
 		dayRu = getDay("ru");
+		
 		dayAr = getDay("ar");
 		dayEn = getDay("en");
 
@@ -319,7 +313,7 @@ public class ManagedMechetNamazMax {
 		for (Namaz n : namaz) {
 			time.add(n.getDate());
 		}
-
+		
 		return time;
 
 	}
@@ -440,87 +434,50 @@ public class ManagedMechetNamazMax {
 	}
 
 	/**
-	 * Эта функция нужна лишь для того чтобы достать исламские месяца
+	 * Функция возвращающая текущий месяц в исламском исчеслении
 	 * 
-	 * @param today
 	 * @param lang
+	 * @param today
 	 * @return
 	 */
-	public static ArrayList<String> dataOutput(Date today, String lang) {
+	
+	public static String getIslamMonth(String lang,String num) {
 
 		Connection conn = null;
 		ResultSet res = null;
 		PreparedStatement stmt = null;
 
-		ArrayList<String> data = new ArrayList<>();
+		String month=new String();
+		
 		try {
 			conn = DbConnection.Connection_to_my_db_Max();
-			String query2 = "select\n" + "m.message \n" + "from messages m \n"
-					+ "join msg_templates mt on mt.id = m.id_msg_templates \n"
-					+ "join languages l on l.id = m.id_languages\n" + "where mt.template like 'clock_msg_%' \n"
-					+ "and l.code = '" + lang + "'";
-
+			String query2 = "select * from get_islam_month('"+num+"','"+lang+"');";
+			
 			stmt = conn.prepareStatement(query2);
 
 			res = stmt.executeQuery();
 
 			while (res.next()) {
-				data.add(res.getString("message"));
+				month=res.getString("get_islam_month");
 			}
-
+			
 		} catch (SQLException e) {
 			System.out.println(e);
 		} finally {
 			try {
-				res.close();
-			} catch (SQLException e) {
-			}
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-			}
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-			}
-
-		}
-		try {
-			conn = DbConnection.Connection_to_my_db_Max();
-			String query2 = "select * from get_islam_date('" + today + "');";
-
-			stmt = conn.prepareStatement(query2);
-
-			res = stmt.executeQuery();
-
-			while (res.next()) {
-				data.add(res.getString("r_value"));
-				data.add(res.getString("r_week_day"));
-				data.add(res.getString("r_month"));
-			}
-
-		} catch (SQLException e) {
-			System.out.println(e);
-		} finally {
-			try {
-				res.close();
-			} catch (SQLException e) {
-			}
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-			}
-			try {
-				conn.close();
+				if (res != null)
+					res.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
 			} catch (SQLException e) {
 
 			}
 
 		}
 
-		return data;
-
+		return month;
 	}
 
 	/**
@@ -597,7 +554,7 @@ public class ManagedMechetNamazMax {
 			String query2 = "select \n" + "l.code\n" + ",mt.template\n" + ",m.message\n" + "from messages m\n"
 					+ "join msg_templates mt on mt.id = m.id_msg_templates\n"
 					+ "join languages l on l.id = m.id_languages\n" + "where 1=1\n"
-					+ "and mt.template like 'clock_week%'\n" + "and l.code = '" + lang + "'\n" + "order by m.id";
+					+ "and mt.template like 'clock_week%'\n" + "and l.code = '" + lang + "'\n" + "order y m.id";
 
 			ps = connection.prepareStatement(query2);
 

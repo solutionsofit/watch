@@ -161,9 +161,8 @@ public class ManagedNamazMax {
 	@PostConstruct
 	public void init() {
 
-		ArrayList<String> data_ar = new ArrayList<>();
-
 		SimpleDateFormat formatterdate = new SimpleDateFormat("dd.MM.yyyy");
+		SimpleDateFormat formatterdate1 = new SimpleDateFormat("MM");
 
 		Date today = new Date(System.currentTimeMillis());
 
@@ -216,24 +215,16 @@ public class ManagedNamazMax {
 		}
 
 		dateIslam = formatterdate.format(getIslamDateByToday(today));
-		data_ar = dataOutput(today, "ar");
-		monthTatIslam = getMonth("tat").get(Integer.parseInt(data_ar.get(5)) + 11);// +11 потому что в базе данных
-																					// мусульманские месяца идут с 11
-																					// индекса
-		monthRuIslam = getMonth("ru").get(Integer.parseInt(data_ar.get(5)) + 11);// +11 потому что в базе данных
-																					// мусульманские месяца идут с 11
-																					// индекса
-		monthArIslam = getMonth("ar").get(Integer.parseInt(data_ar.get(5)) + 11);// +11 потому что в базе данных
-																					// мусульманские месяца идут с 11
-																					// индекса
-		monthEnIslam = getMonth("en").get(Integer.parseInt(data_ar.get(5)) + 11);// +11 потому что в базе данных
-																					// мусульманские месяца идут с 11
-																					// индекса
 
-		monthAr = getMonth("ar").get(today.getMonth());
-		monthTat = getMonth("tat").get(today.getMonth());
-		monthRu = getMonth("ru").get(today.getMonth());
-		monthEn = getMonth("en").get(today.getMonth());
+		monthTatIslam = getIslamMonth("tat", formatterdate1.format(getIslamDateByToday(today)));
+		monthRuIslam = getIslamMonth("ru", formatterdate1.format(getIslamDateByToday(today)));
+		monthArIslam = getIslamMonth("ar", formatterdate1.format(getIslamDateByToday(today)));
+		monthEnIslam = getIslamMonth("en", formatterdate1.format(getIslamDateByToday(today)));
+
+		monthAr = getMonth("ar", today);
+		monthTat = getMonth("tat", today);
+		monthRu = getMonth("ru", today);
+		monthEn = getMonth("en", today);
 
 		dayTat = getDay("tat");
 		dayRu = getDay("ru");
@@ -378,16 +369,14 @@ public class ManagedNamazMax {
 			System.out.println(e);
 		} finally {
 			try {
-				res.close();
+				if (res != null)
+					res.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
 			} catch (SQLException e) {
-			}
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-			}
-			try {
-				conn.close();
-			} catch (SQLException e) {
+
 			}
 
 		}
@@ -440,97 +429,13 @@ public class ManagedNamazMax {
 	}
 
 	/**
-	 * Эта функция нужна лишь для того чтобы достать исламские месяца
-	 * 
-	 * @param today
-	 * @param lang
-	 * @return
-	 */
-	public static ArrayList<String> dataOutput(Date today, String lang) {
-
-		Connection conn = null;
-		ResultSet res = null;
-		PreparedStatement stmt = null;
-
-		ArrayList<String> data = new ArrayList<>();
-		try {
-			conn = DbConnection.Connection_to_my_db_Max();
-			String query2 = "select\n" + "m.message \n" + "from messages m \n"
-					+ "join msg_templates mt on mt.id = m.id_msg_templates \n"
-					+ "join languages l on l.id = m.id_languages\n" + "where mt.template like 'clock_msg_%' \n"
-					+ "and l.code = '" + lang + "'";
-
-			stmt = conn.prepareStatement(query2);
-
-			res = stmt.executeQuery();
-
-			while (res.next()) {
-				data.add(res.getString("message"));
-			}
-
-		} catch (SQLException e) {
-			System.out.println(e);
-		} finally {
-			try {
-				res.close();
-			} catch (SQLException e) {
-			}
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-			}
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-			}
-
-		}
-		try {
-			conn = DbConnection.Connection_to_my_db_Max();
-			String query2 = "select * from get_islam_date('" + today + "');";
-
-			stmt = conn.prepareStatement(query2);
-
-			res = stmt.executeQuery();
-
-			while (res.next()) {
-				data.add(res.getString("r_value"));
-				data.add(res.getString("r_week_day"));
-				data.add(res.getString("r_month"));
-			}
-
-		} catch (SQLException e) {
-			System.out.println(e);
-		} finally {
-			try {
-				res.close();
-			} catch (SQLException e) {
-			}
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-			}
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-			}
-
-		}
-
-		return data;
-
-	}
-
-	/**
 	 * Функция возвращающая массив с месяцами(исламскими и обычными(обычные
 	 * начинаются с 0 и кончаются 11,исламские с 11 до 23))\ Нужно доставать
 	 * исламские месяцы при помощи скрипта который написал Дядя Женя,но он у меня не
 	 * работает, так что пока так:(((
 	 * 
 	 */
-	public static ArrayList<String> getMonth(String lang) {
+	public static String getMonth(String lang, Date today) {
 
 		Connection conn = null;
 		ResultSet res = null;
@@ -557,15 +462,59 @@ public class ManagedNamazMax {
 			System.out.println(e);
 		} finally {
 			try {
-				res.close();
+				if (res != null)
+					res.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
 			} catch (SQLException e) {
+
 			}
-			try {
-				stmt.close();
-			} catch (SQLException e) {
+
+		}
+
+		return month.get(today.getMonth());
+	}
+
+	/**
+	 * Функция возвращающая текущий месяц в исламском исчеслении
+	 * 
+	 * @param lang
+	 * @param today
+	 * @return
+	 */
+
+	public static String getIslamMonth(String lang, String num) {
+
+		Connection conn = null;
+		ResultSet res = null;
+		PreparedStatement stmt = null;
+
+		String month = new String();
+
+		try {
+			conn = DbConnection.Connection_to_my_db_Max();
+			String query2 = "select * from get_islam_month('" + num + "','" + lang + "');";
+
+			stmt = conn.prepareStatement(query2);
+
+			res = stmt.executeQuery();
+
+			while (res.next()) {
+				month = res.getString("get_islam_month");
 			}
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
 			try {
-				conn.close();
+				if (res != null)
+					res.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
 			} catch (SQLException e) {
 
 			}
@@ -661,6 +610,7 @@ public class ManagedNamazMax {
 				e.printStackTrace();
 			}
 		}
+
 		return islam;
 	}
 	// Getters and Setters
